@@ -1,0 +1,111 @@
+int admin()
+{   
+    int staffid;
+    printf("Enter staff ID: ");
+    scanf(" %d", & staffid);
+    if (staffid == 777)
+    {
+	FILE *movie;
+	struct movies m1;
+	movie=fopen(moviepath,"a");
+	if (movie == NULL) 
+    {
+        printf("Error! No database file found.\n");
+    }
+	
+	printf("Enter the movie ID: ");
+	scanf(" %d", &m1.movie_id);
+	fprintf(movie,"%d ",m1.movie_id);
+	
+	printf("Enter the movie name: ");
+	scanf(" %s", m1.movie_name);
+	fprintf(movie,"%s ",m1.movie_name);
+	
+	printf("Enter the show timing: ");
+	scanf("%s", m1.show_time);
+	fprintf(movie,"%s ",m1.show_time);
+	
+	printf("Enter the price of thr ticket: ");
+	scanf(" %d", &m1.ticket_price);
+	fprintf(movie,"%d\n",m1.ticket_price);
+	
+	fclose(movie);
+	return 0;
+    }
+    else
+    {
+    	printf("*****Incorret staff ID*****");
+	}
+	
+}
+
+int booking()
+{   
+    menu:
+	FILE *movie;
+	struct movies m2;
+	movie=fopen(moviepath,"r");
+	 if (movie == NULL) 
+    {
+        printf("Error! No database file found.\n");
+    }
+    
+    printf("---AVAIBLE SHOWS TODAY---\n");
+     while(fscanf(movie, "%d %s %s %d", &m2.movie_id, m2.movie_name, m2.show_time, &m2.ticket_price) == 4)
+    {
+        printf("ID %d | Movie: %s | Time: %s | Price per ticket: %d\n", m2.movie_id, m2.movie_name, m2.show_time, m2.ticket_price);
+    }
+    printf("-----------------------------------------------------------------------\n");
+    rewind(movie);
+    
+    cous:
+    int Id,count;
+    char name[100];
+    printf("Enter the movie ID you want to booK: ");
+    scanf(" %d",&Id);
+    printf("enter your name: ");
+    scanf(" %s", name);
+    printf("number of tickets you wanted to booK: ");
+    scanf(" %d", &count);
+    
+    int found=0;
+    while(fscanf(movie,"%d %s %s %d",&m2.movie_id,m2.movie_name,m2.show_time,&m2.ticket_price)==4)
+    {
+	if (Id == m2.movie_id)
+        {   
+            found = 1; 
+            break;
+        }
+    }
+    fclose(movie); 
+    
+    if (found==1)
+    {   
+        FILE *ticket;
+        ticket=fopen(ticketspath,"a");
+        if (ticket == NULL) 
+        {
+            printf("Error! No database file found.\n");
+            goto cous;
+        }
+        fprintf(ticket,"%d %s %d %d*%d\n",m2.movie_id,name,count,count,m2.ticket_price);
+        fclose(ticket);
+    
+    	printf("===========================================\n");
+        printf("BOOKING SUCCESSFUL!\n");
+        printf("===========================================\n");
+        printf("Customer Name: %s\n",name);
+        printf("Movie Booked:  %s\n",m2.movie_name);
+        printf("Total Seats:   %d\n",count);
+        printf("Total Paid:    %d\n",count*m2.ticket_price);
+        printf("===========================================\n");
+
+	}
+	else
+	{
+		printf("Movie ID not exist\n");
+		goto menu;
+	}
+	
+
+}
