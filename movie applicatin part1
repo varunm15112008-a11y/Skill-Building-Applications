@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+char moviepath[100]=filepath;
+char ticketspath[100]=filepath;
+
+struct movies
+{
+	int movie_id;
+	char movie_name[100];
+	char show_time[10];
+	int ticket_price;
+};
