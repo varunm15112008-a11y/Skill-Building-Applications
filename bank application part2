@@ -1,0 +1,98 @@
+int register_mumber()
+{   
+    FILE *user_info;
+    struct user_information u1;
+    user_info=fopen(file path, "a");
+    if (user_info == NULL) 
+    {
+        printf("Error! opening file.");
+        exit(1);
+    }
+    printf("======================Enter your data============================\n");
+	printf("Enter your reg_num: ");
+    scanf(" %d", &u1.reg_num);
+    fprintf(user_info,"%d ",u1.reg_num); 
+    
+	printf("Enter your user_name1: ");
+    scanf(" %s", u1.user_name1);
+    fprintf(user_info,"%s ",u1.user_name1); 
+    
+    user_name:
+	printf("Enter your user_name2: ");
+    scanf(" %s", u1.user_name2);
+    if (strcmp(u1.user_name2, u1.user_name1)==0)
+    {
+    	printf("user name1 and user name2 are same\n");
+    	goto user_name;
+	}
+    fprintf(user_info,"%s ",u1.user_name2); 
+    
+    printf("Enter your account number: ");
+    scanf("%d", &u1.account_num);
+    fprintf(user_info,"%d ",u1.account_num); 
+    
+    printf("Enter gender: ");
+    scanf(" %s", u1.gender);
+    fprintf(user_info,"%s ",u1.gender); 
+    
+    phonenumber:
+	printf("Enter phone number: ");
+    scanf(" %lld", &u1.phone_num);
+    
+    int count=0; 
+    long long temp_phone = u1.phone_num; 
+    
+    if (temp_phone < 0) 
+	{
+        temp_phone = -temp_phone;
+    }
+    do {
+        count++;
+        temp_phone /= 10; 
+    } while (temp_phone != 0);
+    
+    if (count==10)
+    {
+        fprintf(user_info,"%lld ",u1.phone_num); 
+    }
+    else
+    {
+    	printf("Invalid phone number\n"); 
+    	goto phonenumber; 
+	}
+	
+    printf("Enter your mail id: ");
+    scanf("%s", u1.mail_id);
+    fprintf(user_info,"%s ",u1.mail_id); 
+
+    pass:
+	printf("Enter your password (6 digits): ");
+    scanf(" %d", &u1.password);
+    
+    int count1=0;
+    int temp_pass = u1.password; 
+    
+    if (temp_pass < 0) 
+	{
+        temp_pass = -temp_pass;
+    }
+    do {
+        count1++;
+        temp_pass /= 10; 
+    } while (temp_pass != 0);
+    
+    if (count1==6)
+    {
+        fprintf(user_info,"%d\n",u1.password); 
+    }
+    else
+    {
+    	printf("Password must be 6 digits\n"); 
+    	goto pass; 
+	}
+    
+    printf("==========================data saved===============================\n");
+    
+    fclose(user_info);
+    return 0;   
+}
