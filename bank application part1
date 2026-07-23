@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int intialamount=5000;
+int num;
+ 
+struct user_information
+{
+	int reg_num;
+	char user_name1[100];
+	char user_name2[100];
+	char gender[100];
+	int account_num;
+	long long phone_num;
+	int password;
+	char mail_id[50];
+};
+int deposit()
+{   
+    int useramount;
+    printf("Enter your amount: ");
+    scanf("%d", &useramount);
+	intialamount=intialamount+useramount;
+	printf("Balance = %d\n",intialamount);
+    return 0;
+}
+
+int withdraw()
+{   
+    int useramount;
+    printf("Enter your amount: ");
+    scanf("%d", &useramount);
+	intialamount=intialamount-useramount;
+	printf("Balance = %d\n",intialamount);
+    return 0;
+}
