@@ -1,0 +1,27 @@
+int main()
+{   
+    inc:
+	printf("===========================================\n");
+	printf("WELCOME TO COIMBATORE CINEMAS\n");
+	printf("==========================================\n");
+	printf("1. Admin: Add a Movie Schedule (A)\n");
+	printf("2. User: View Movies & Book a Ticket (B)\n");
+	printf("3. Exit Application (E)\n");
+	printf("Enter Choice: ");
+	char user;
+	scanf(" %c", &user);
+	if (user=='A')
+	{
+		admin();
+		goto inc;
+	}
+	else if (user=='B')
+	{
+		booking();
+		goto inc;
+	}
+	else if (user == 'E')
+	{
+		goto inc;
+	}
+}
